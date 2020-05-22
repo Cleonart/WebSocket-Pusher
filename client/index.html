@@ -3,6 +3,7 @@
 <head>
 	<title>Fire Management</title>
   	<script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+
   	<script>
 
 	    var pusher = new Pusher('f2299725eb727e961ede', {
@@ -11,13 +12,34 @@
 
 	    var channel = pusher.subscribe('my-channel');
 	    channel.bind('my-event', function(data) {
-	      alert(JSON.stringify(data));
+	    	updateStatus(data.channel, data.message);
 	    });
 
+	    function updateStatus(channel, message){
+	    	var data = document.getElementById("container" + channel);
+	    	if(message == 0 || message == "0"){
+  				data.style.backgroundColor = "green";
+	    	}
+	    	else if(message == 1 || message == "1"){
+	    		data.style.backgroundColor = "red";
+	    	}
+	    }
+
   	</script>
+  	<style type="text/css">
+  		
+  		div{
+  			margin-right:10px;
+  			width:200px;
+  			height:200px;
+  			background-color:#000
+  		}
+
+  	</style>
+
 </head>
 
-<body>
-	<h1>Pusher Test</h1>
-	<p> Try publishing an event to channel <code>my-channel</code> with event name <code>my-event</code>.</p>
+<body style="display:flex;">
+	<div id="container1"></div>
+	<div id="container2"></div>
 </body>

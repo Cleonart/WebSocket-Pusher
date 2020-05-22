@@ -7,7 +7,7 @@
 								array('cluster' => 'ap1'));
 
 	// trigger connection
-	if(isset($_GET['msg'])){
-		$pusher->trigger('my-channel', 'my-event', array('message' => $_GET['msg']));
+	if(isset($_GET['msg']) && isset($_GET['channel'])){
+		$pusher->trigger('my-channel', 'my-event', array('message' => $_GET['msg'], 'channel' => $_GET['channel']));
 	}
 ?>

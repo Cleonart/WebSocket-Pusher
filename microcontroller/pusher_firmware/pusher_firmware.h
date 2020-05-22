@@ -16,12 +16,22 @@
 #include "ESP8266HTTPClient.h"
 
 class PusherFirmware{
+  
   public:
     
     //constructor
-    PusherServer(String url_);
+    PusherFirmware(String channel_, String url_);
       
     //this is "begin" function, start and initialize wifi ssid and password ssid
     void begin(String ssid_, String pass_);
 
-}
+    void connectToWifi(String ssid, String password);
+    void trigger(String sensor_data);
+    void httpRequest(String sensor_data);
+      
+  private:
+    String url;
+    String sensor_channel;
+};
+
+#endif
