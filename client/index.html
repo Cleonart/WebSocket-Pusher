@@ -6,40 +6,98 @@
 
   	<script>
 
+  		// create new pusher instance
 	    var pusher = new Pusher('f2299725eb727e961ede', {
 	      cluster: 'ap1'
 	    });
 
+	    // make channel
 	    var channel = pusher.subscribe('my-channel');
 	    channel.bind('my-event', function(data) {
 	    	updateStatus(data.channel, data.message);
 	    });
 
+	    // update status
 	    function updateStatus(channel, message){
-	    	var data = document.getElementById("container" + channel);
+
+	    	var data  = document.getElementById("container" + channel);
+	    	var stats = document.getElementById("status" + channel);
+
 	    	if(message == 0 || message == "0"){
   				data.style.backgroundColor = "green";
+  				stats.style.backgroundColor = "green";
+  				stats.value = "Aman";
 	    	}
+
+	    	else if(message == 0.5 || message == "0.5"){
+  				data.style.backgroundColor = "yellow";
+  				stats.style.backgroundColor = "yellow";
+	    		stats.value = "Berasap";
+	    	}
+
 	    	else if(message == 1 || message == "1"){
 	    		data.style.backgroundColor = "red";
+	    		stats.style.backgroundColor = "red";
+	    		stats.value = "Kebakaran";
 	    	}
+
 	    }
 
   	</script>
+  	
   	<style type="text/css">
   		
-  		div{
-  			margin-right:10px;
+  		@font-face {
+		  font-family : 'SF';
+		  src : url('./assets/SFBold.otf') format('opentype');
+		}
+
+  		.room-container-child{
+  			margin-right:20px;
   			width:200px;
   			height:200px;
-  			background-color:#000
+  			background-color:#000;
+  			font-family:'SF';
+  			position:relative;
+  			border-radius:8px;
+  		}
+
+  		.room-container-child .title{
+  			margin-left:20px;
+  			margin-top:20px;
+  			color:#fff;
+  		}
+
+  		.room-container-child .status{
+  			padding:5px 20px;
+  			background-color:#2ecc71;
+  			color:#fff;
+  		}
+
+  		.room-container-child .room-status{
+  			padding:5px 20px;
+  			background:#fff;
+  			border-radius:40px;
+  			margin-left:20px;
+  			margin-top:20px;
   		}
 
   	</style>
 
 </head>
 
-<body style="display:flex;">
-	<div id="container1"></div>
-	<div id="container2"></div>
+<body style="margin:40px">
+	<h2 style="font-family:'SF'">Bulding Management System</h2>
+	<div class="room-container" style="display:flex;">
+		<div class="room-container-child" id="container1">
+			<p class="title">Ruangan 1</p>
+			<p class="status">online</p>
+			<span class="room-status" id="status1">Aman</span>
+		</div>
+		<div class="room-container-child" id="container2">
+			<p class="title">Ruangan 2</p>
+			<p class="status">online</p>
+			<span class="room-status" id="status2">Aman</span>
+		</div>
+	</div>
 </body>

@@ -17,7 +17,7 @@ PusherFirmware::PusherFirmware(String channel_, String url_){
 /**
  * Begin function
  */
-void PusherFirmware::begin(String ssid_, String password_){
+void PusherFirmware::begin(char ssid_[], char password_[]){
     Serial.begin(115200);
     connectToWifi(ssid_, password_);
 }
@@ -30,7 +30,7 @@ void PusherFirmware::httpRequest(String sensor_data){
   
     //constructor
     HTTPClient http;
-    String params = "?channel=" + sensor_channel + "?msg=" + sensor_data;
+    String params = "?channel=" + sensor_channel + "&msg=" + sensor_data;
     
     //begin http request
     http.begin(url + params);
@@ -54,7 +54,7 @@ void PusherFirmware::httpRequest(String sensor_data){
  * Connect To Wifi Fucntion 
  * @params : SSID, PASSWORD 
  */ 
- void PusherFirmware::connectToWifi(String ssid, String password){
+ void PusherFirmware::connectToWifi(char ssid[], char password[]){
 
   //begin wifi service
   WiFi.begin(ssid, password);

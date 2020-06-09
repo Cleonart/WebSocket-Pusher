@@ -23,9 +23,11 @@ class PusherFirmware{
     PusherFirmware(String channel_, String url_);
       
     //this is "begin" function, start and initialize wifi ssid and password ssid
-    void begin(String ssid_, String pass_);
+    void begin(char ssid_[], char pass_[]);
+    
+    void connectToWifi(char ssid[], char password[]);
 
-    void connectToWifi(String ssid, String password);
+    // trigger http request
     void trigger(String sensor_data);
     void httpRequest(String sensor_data);
       
